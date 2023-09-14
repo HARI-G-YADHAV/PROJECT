@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/style/styles.css">
+        <title>Your Webpage Title</title>
+        <script>
+
+    </script>
+    </head>
+    <body>
+        <header class="search-bar">
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button class="search-button"></button>
+            </div>
+        </header>
+        <nav class="left-nav">
+            <form method="post">
+                {% csrf_token %}
+                <label for="section">Choose a section:</label>
+
+                <select id="section" name="section">
+                    <option value="c1">c1</option>
+                    <option value="c2">c2</option>
+                    <option value="c3">c3</option>
+                </select>
+
+                <button class="compose-button">Compose</button>
+
+            </form>
+            <ul>
+                <li><a href="#">Pending</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>{{ newfiles.file_no }}</h1>
+        </main>
+    </body>
+</html>
