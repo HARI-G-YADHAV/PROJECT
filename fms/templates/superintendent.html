@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style/styles.css">
+    <title>superintendent Dashboard</title>
+    <style>
+        .custom-alert {
+            padding: 15px;
+            border: 1px solid #d4edda;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .custom-alert.success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var messages = document.querySelectorAll('.messages .success,.messages .error');
+            {% for message in messages %}
+              if (messages.length > 0) {
+                messages.forEach(function(message) {
+                    setTimeout(function() {
+                        message.style.display = 'none';
+                    }, 3000);  // Dismiss after 5 seconds (adjust as needed)
+                });
+              }
+            {% endfor %}
+            
+        });
+        </script>
+</head>
+
+<body>
+    <header class="search-bar">
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+            <button class="search-button"></button>
+        </div>
+    </header>
+    <nav class="left-nav">
+        <form method="post">
+            {% csrf_token %}
+        <ul>
+            <label for="section">Choose a section:</label>
+
+            <select id="section" name="section">
+                {% for username in usernames %}
+                    <option value="{{ username }}">{{ username }}</option>
+                {% endfor %}    
+            </select>
+
+            <button class="compose-button">Compose</button>
+
+        </form>
+        
+            <li><a href="#">Pending</a></li>
+            <li><a href="#">track file</a></li>
+            <li><a class="nav-link" href="{% url 'logout' %}">logout</a>
+        </ul>
+    </nav>
+    <main>
+        {% if messages %}
+            <script>
+                {% for message in messages %}
+                    alert("{{ message }}");
+                {% endfor %}
+            </script>
+        {% endif %}
+
+
+        <div class='bagimg'>
+            {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+          {% endif %}
+        </div> 
+
+    </main>
+</body>
+
+</html>
